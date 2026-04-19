@@ -1,122 +1,66 @@
-
-import pandas as pd
-from itertools import product
-
 Error_message = "A valid time cannot be made from these four numbers."
 
 
-def allowed_input(four_numbers: str) -> bool:
-    "Checks if the original string is an allowed input (not an allowed time)"
-
-    if len(four_numbers) != 4:
-        return False
-
-    nums = "0123456789"
-
-    # Checks if each character is a whole number
-    for character in four_numbers:
-        if character not in nums:
-            return False
-
-    return True
-
-
-def number_list(four_numbers: str) -> list[int]:
-    "Converts a string of 4 numbers into a list of 4 integers"
-
-    num_list = []
-
-    for number in four_numbers:
-        num_list.append(int(number))
-
-    return num_list
-
-
-def largest_value_from(max_val, nums: list[int]) -> int:
-    "Given a list, it sorts it into descending order, and returns "
-    "the largest value in it starting from a specified number"
-
-    # Sorts the list of numbers into descending order
-    descending_nums = sorted(nums, reverse=True)
-
-    allowed_nums = []
-
-    # Appends the number to a list if is allowed
-    for number in descending_nums:
-        if number <= max_val:
-            allowed_nums.append(number)
-
-    # As the numbers have already been sorted into descending order,
-    # The first valid number is at the 0th index
-
-    if allowed_nums == []:
-        return "Error"
-
-    else:
-        return allowed_nums[0]
-
-
-def create_time(final_nums: list[int]) -> str:
+def create_time(final_nums: str) -> str:
 
     time = ""
 
-    time += str(final_nums[0]) + str(final_nums[1])
+    time += final_nums[0] + final_nums[1]
     time += ":"
-    time += str(final_nums[2]) + str(final_nums[3])
+    time += final_nums[2] + final_nums[3]
 
     return time
 
 
+def all_combs_of_four(four_digits: str) -> list[str]:
+
+    combos = []
+
+    for i in range(4):
+        for j in range(4):
+            if j != i:
+                for k in range(4):
+                    if k != i and k != j:
+                        for l in range(4):
+                            if l != i and l != j and l != k:
+                                perm = four_digits[i] + four_digits[j] + \
+                                    four_digits[k] + four_digits[l]
+                                combos.append(perm)
+
+    return combos
+
+
+def check_if_time_valid(four_digits: list[int]) -> bool:
+    hour = int((four_digits[0] * 10) + four_digits[1])
+    minutes = int((four_digits[2] * 10) + four_digits[3])
+
+    if hour < 24 and minutes < 60:
+        return True
+    else:
+        return False
+
+
 def largest_time(four_nums: str) -> str:
 
-    # Checking if the input string is initially valid
-    if allowed_input(four_nums) == False:
-        return Error_message
+    # Creates a list of string combinations given 4 numbers
+    combinations = all_combs_of_four(four_nums)
 
-    # Making an empty list to append values to in order
-    time_list = []
+    valid_times_list = []
 
-    # Making the input string into a list of four numbers
-    digits_list = number_list(four_nums)
+    for number_string in combinations:
+        if check_if_time_valid(number_string) == True:
+            valid_times_list.append(number_string)
 
-    # Obtaining the largest possible number for the first time digit
-    first_digit = largest_value_from(2, digits_list)
+    descending_nums = sorted(valid_times_list, reverse=True)
 
-    if first_digit == "Error":
-        return Error_message
-    else:
-        # Adds first digit to the time list
-        time_list.append(first_digit)
-        # Removes first instance of this digit from the digits list to avoid double counting
-        digits_list.remove(first_digit)
+    return valid_times_list
 
-    # Obtaining the largest possible number for the second time digit
 
-    if first_digit == 2:
-        second_digit = largest_value_from(3, digits_list)
-    else:
-        second_digit = largest_value_from(9, digits_list)
-
-    if second_digit == "Error":
-        return Error_message
-    else:
-        # Adds second digit to the time list
-        time_list.append(second_digit)
-        # Removes first instance of this digit from the digits list to avoid double counting
-        digits_list.remove(second_digit)
-
-    # Obtaining the largest possible number for the third time digit
-    third_digit = largest_value_from(5, digits_list)
-
-    if third_digit == "Error":
-        return Error_message
-    else:
-        # Adds first digit to the time list
-        time_list.append(third_digit)
-        # Removes first instance of this digit from the digits list to avoid double counting
-        digits_list.remove(third_digit)
-
-    # Adding the last digit to the time string
-    time_list.append(digits_list[0])
-
-    return (create_time(time_list))
+def generate__all_combinations():
+    combinations = []
+    for i in range(10):
+        for j in range(10):
+            for k in range(10):
+                for l in range(10):
+                    combinations.append(f"{i}{j}{k}{l}")
+    return combinations
