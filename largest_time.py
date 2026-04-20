@@ -24,16 +24,16 @@ def all_combs_of_four(four_digits: str) -> list[str]:
             if j != i:
                 for k in range(4):
                     if k not in (i, j):
-                        for l in range(4):
-                            if l not in (i, j, k):
+                        for m in range(4):
+                            if m not in (i, j, k):
                                 perm = four_digits[i] + four_digits[j] + \
-                                    four_digits[k] + four_digits[l]
+                                    four_digits[k] + four_digits[m]
                                 combos.append(perm)
 
     return combos
 
 
-def check_if_time_valid(four_digits: list[int]) -> bool:
+def check_if_time_valid(four_digits: str) -> bool:
     "Checks if a possible time can be made given four numbers"
 
     # Creates the hour from the first and second digit
@@ -43,10 +43,7 @@ def check_if_time_valid(four_digits: list[int]) -> bool:
     minutes = (int(four_digits[2]) * 10) + int(four_digits[3])
 
     # Condition for a time to be valid
-    if hour < 24 and minutes < 60:
-        return True
-    else:
-        return False
+    return hour < 24 and minutes < 60
 
 
 def largest_time(four_nums: str) -> str:
@@ -58,7 +55,7 @@ def largest_time(four_nums: str) -> str:
     valid_times_list = []
 
     for number_string in combinations:
-        if check_if_time_valid(number_string) == True:
+        if check_if_time_valid(number_string):
             valid_times_list.append(number_string)
 
     if not valid_times_list:
@@ -79,8 +76,8 @@ def generate_all_input_combinations():
     for i in range(10):
         for j in range(10):
             for k in range(10):
-                for l in range(10):
-                    combinations.append(f"{i}{j}{k}{l}")
+                for m in range(10):
+                    combinations.append(f"{i}{j}{k}{m}")
     return combinations
 
 
@@ -104,5 +101,5 @@ if __name__ == "__main__":
                 invalid_count += 1
 
     print("Done! Check every_largest_time.csv")
-    print(f"Number of valid times: {invalid_count}")
-    print(f"Number of invalid times: {10000 - invalid_count}")
+    print(f"Number of invalid times: {invalid_count}")
+    print(f"Number of valid times: {10000 - invalid_count}")

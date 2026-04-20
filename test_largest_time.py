@@ -2,8 +2,8 @@
 
 from largest_time import create_time, all_combs_of_four, check_if_time_valid, largest_time, generate_all_input_combinations
 
-""" Tests that create_time correctly makes a time string from a list of four integers """
 
+# Tests that create_time correctly makes a time string from a list of four integers
 
 def test_create_time_length():
     " Tests that create_time makes a string 5 characters long"
@@ -18,7 +18,6 @@ def test_create_time_colon():
 def test_create_time_1():
     " Tests that create time makes the correct time string"
     assert create_time("2359") == "23:59"
-    assert create_time("0000") == "00:00"
 
 
 def test_create_time_2():
@@ -26,7 +25,7 @@ def test_create_time_2():
     assert create_time("0000") == "00:00"
 
 
-""" Tests that create_time correctly makes a time string from a list of four integers """
+# Tests that create_time correctly makes a time string from a list of four integers
 
 
 def test_all_combos_of_four_length():
@@ -81,7 +80,7 @@ def test_all_combos_of_four__contains_reverse():
     assert "4321" in combos
 
 
-""" Tests that check_if_time_valid correctly identifies for digit numbers that can be times"""
+# Tests that check_if_time_valid correctly identifies for digit numbers that can be times
 
 
 def test_check_if_time_valid_True_1():
@@ -89,47 +88,27 @@ def test_check_if_time_valid_True_1():
     assert check_if_time_valid("2359") == True
 
 
-def test_check_if_time_valid_True_1():
+def test_check_if_time_valid_True_2():
     "Tests if function returns True correctly"
     assert check_if_time_valid("0000") == True
 
 
-def test_check_if_time_valid_False():
+def test_check_if_time_valid_False_1():
     "Tests if function returns False correctly"
     assert check_if_time_valid("2400") == False
 
 
-def test_check_if_time_valid_False():
+def test_check_if_time_valid_False_2():
     "Tests if function returns False correctly"
     assert check_if_time_valid("0060") == False
 
 
-def test_check_if_time_valid_False():
+def test_check_if_time_valid_False_3():
     "Tests if function returns False correctly"
     assert check_if_time_valid("2460") == False
 
 
-def test_check_if_time_valid_hour():
-    "Tests if function returns the hour correctly"
-    # Arrange
-    digits = "1234"
-    # Act
-    hour = (int(digits[0]) * 10) + int(digits[1])
-    # Assert
-    assert hour == 12
-
-
-def test_check_if_time_valid_minute():
-    "Tests if function returns the hour correctly"
-    # Arrange
-    digits = "1234"
-    # Act
-    minutes = (int(digits[2]) * 10) + int(digits[3])
-    # Assert
-    assert minutes == 34
-
-
-""" Tests that largest_time correctly identifies for digit numbers that can be times"""
+# Tests that largest_time correctly identifies for digit numbers that can be times
 
 
 def test_largest_time_maximal():
