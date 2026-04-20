@@ -5,7 +5,7 @@ def create_time(nums: str) -> str:
     "Creates a string formatted to look like a time given an input string"
     time = nums[0] + nums[1] + ":" + nums[2] + nums[3]
 
-    return time
+    return
 
 
 def all_combs_of_four(four_digits: str) -> list[str]:
@@ -62,7 +62,7 @@ def largest_time(four_nums: str) -> str:
     return create_time(largest_value)
 
 
-def generate_all_input_combinations() -> None:
+def generate_all_input_combinations() -> list[str]:
     """Creates a list of all positive 4 digit numbers as a strings"""
 
     combinations = []
