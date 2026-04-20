@@ -25,7 +25,7 @@ def test_create_time_2():
     assert create_time("0000") == "00:00"
 
 
-# Tests that create_time correctly makes a time string from a list of four integers
+# Tests that all_combos_of_four makes all combinations of numbers given four starting numbers
 
 
 def test_all_combos_of_four_length():
@@ -54,7 +54,7 @@ def test_all_combos_of_four_each_length_4():
 
 
 def test_all_combos_of_four_contain_original_digits():
-    " Tests that there are 24 entries when all digits same"
+    " Tests all numbers have one of each of the input digits"
     # Arrange
     combos = all_combs_of_four("1234")
     # Act
@@ -85,12 +85,12 @@ def test_all_combos_of_four__contains_reverse():
 
 def test_check_if_time_valid_True_1():
     "Tests if function returns True correctly"
-    assert check_if_time_valid("2359") == True
+    assert check_if_time_valid("2359")
 
 
 def test_check_if_time_valid_True_2():
     "Tests if function returns True correctly"
-    assert check_if_time_valid("0000") == True
+    assert check_if_time_valid("0000")
 
 
 def test_check_if_time_valid_False_1():
@@ -121,16 +121,16 @@ def test_largest_time_zeros():
     assert largest_time("0000") == "00:00"
 
 
-def test_largest_time_zeros_arrangement_1():
+def test_largest_time_arrangement_1():
     "Tests if largest_time picks largest possible arrangement"
     assert largest_time("1738") == "18:37"
 
 
-def test_largest_time_zeros_arrangement_2():
+def test_largest_time_arrangement_2():
     "Tests if largest_time picks largest possible arrangement"
     assert largest_time("1230") == "23:10"
 
 
-def test_largest_time_zeros_arrangement_duplicates():
+def test_largest_time_arrangement_duplicates():
     "Tests if largest_time works for duplicates"
     assert largest_time("2222") == "22:22"
