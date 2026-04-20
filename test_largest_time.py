@@ -84,12 +84,12 @@ def test_all_combos_of_four__contains_reverse():
 
 
 def test_check_if_time_valid_True_1():
-    "Tests if function returns True correctly"
+    "Tests if function returns True correctly for largest possible time"
     assert check_if_time_valid("2359")
 
 
 def test_check_if_time_valid_True_2():
-    "Tests if function returns True correctly"
+    "Tests if function returns True correctly for smallest possible time"
     assert check_if_time_valid("0000")
 
 
