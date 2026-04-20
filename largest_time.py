@@ -1,4 +1,4 @@
-Error_message = "A valid time cannot be made from these four numbers."
+ERROR_MESSAGE = "A valid time cannot be made from these four numbers."
 
 
 def create_time(final_nums: str) -> str:
@@ -23,9 +23,9 @@ def all_combs_of_four(four_digits: str) -> list[str]:
             # Ensures an index isn't repeated
             if j != i:
                 for k in range(4):
-                    if k != i and k != j:
+                    if k not in (i, j):
                         for l in range(4):
-                            if l != i and l != j and l != k:
+                            if l not in (i, j, k):
                                 perm = four_digits[i] + four_digits[j] + \
                                     four_digits[k] + four_digits[l]
                                 combos.append(perm)
@@ -61,8 +61,8 @@ def largest_time(four_nums: str) -> str:
         if check_if_time_valid(number_string) == True:
             valid_times_list.append(number_string)
 
-    if valid_times_list == []:
-        return Error_message
+    if not valid_times_list:
+        return ERROR_MESSAGE
 
     # Makes a copy of the list in descending order
     descending_nums = sorted(valid_times_list, reverse=True)
@@ -85,7 +85,7 @@ def generate_all_input_combinations():
 
 
 if __name__ == "__main__":
-    combinations = generate_all_input_combinations()
+    inputs = generate_all_input_combinations()
 
     # Counts how many times an invalid time is made
     invalid_count = 0
@@ -96,11 +96,11 @@ if __name__ == "__main__":
         # Header row
         file.write("Input string, Largest Time \n")
 
-        for combo in combinations:
+        for combo in inputs:
             result = largest_time(combo)
             file.write(f"{combo},{result}\n")
 
-            if result == Error_message:
+            if result == ERROR_MESSAGE:
                 invalid_count += 1
 
     print("Done! Check every_largest_time.csv")
