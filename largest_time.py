@@ -5,7 +5,7 @@ def create_time(nums: str) -> str:
     "Creates a string formatted to look like a time given an input string"
     time = nums[0] + nums[1] + ":" + nums[2] + nums[3]
 
-    return
+    return time
 
 
 def all_combs_of_four(four_digits: str) -> list[str]:
@@ -15,8 +15,10 @@ def all_combs_of_four(four_digits: str) -> list[str]:
 
     for i in range(4):
         for j in range(4):
+
             # Ensures an index isn't repeated
             if j != i:
+
                 for k in range(4):
                     if k not in (i, j):
                         for m in range(4):
