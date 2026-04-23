@@ -1,13 +1,6 @@
 ERROR_MESSAGE = "A valid time cannot be made from these four numbers."
 
 
-def create_time(nums: str) -> str:
-    "Creates a string formatted to look like a time given an input string"
-    time = nums[0] + nums[1] + ":" + nums[2] + nums[3]
-
-    return time
-
-
 def all_combs_of_four(four_digits: str) -> list[str]:
     "Creates all 24 combinations that can be made given four numbers"
 
@@ -16,7 +9,7 @@ def all_combs_of_four(four_digits: str) -> list[str]:
     for i in range(4):
         for j in range(4):
 
-            # Ensures an index isn't repeated
+            # Conditions like these ensures an index isn't repeated
             if j != i:
 
                 for k in range(4):
@@ -43,6 +36,25 @@ def check_if_time_valid(four_digits: str) -> bool:
     return hour < 24 and minutes < 60
 
 
+def time_to_minutes(four_digits: str) -> int:
+    "Converts a four digit time string to total minutes for comparison"
+
+    # Creates the hour from the first and second digit
+    hour = (int(four_digits[0]) * 10) + int(four_digits[1])
+
+    # Creates the minute from the third and fourth digit
+    minutes = (int(four_digits[2]) * 10) + int(four_digits[3])
+
+    return (hour * 60) + minutes
+
+
+def create_time(nums: str) -> str:
+    "Creates a string formatted to look like a time given an input string"
+    time = nums[0] + nums[1] + ":" + nums[2] + nums[3]
+
+    return time
+
+
 def largest_time(four_nums: str) -> str:
     "Determines the largest time possible given a string of four numbers"
 
@@ -58,13 +70,13 @@ def largest_time(four_nums: str) -> str:
     if not valid_times_list:
         return ERROR_MESSAGE
 
-    # Obtains the largest value in the list
-    largest_value = max(valid_times_list)
+    # Obtains the time with the largest value in minutes
+    largest_value = max(valid_times_list, key=time_to_minutes)
 
     return create_time(largest_value)
 
 
-def generate_all_input_combinations() -> list[str]:
+def generate_all_possible_input_combinations() -> list[str]:
     """Creates a list of all positive 4 digit numbers as a strings"""
 
     combinations = []
@@ -77,7 +89,7 @@ def generate_all_input_combinations() -> list[str]:
 
 
 if __name__ == "__main__":
-    inputs = generate_all_input_combinations()
+    inputs = generate_all_possible_input_combinations()
 
     # Counts how many times an invalid time is made
     invalid_count = 0
@@ -86,7 +98,7 @@ if __name__ == "__main__":
     with open("every_largest_time.csv", "w") as file:
 
         # Header row
-        file.write("Input string, Largest Time \n")
+        file.write("Input string,Largest Time \n")
 
         for combo in inputs:
             result = largest_time(combo)

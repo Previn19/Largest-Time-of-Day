@@ -1,6 +1,6 @@
 
 
-from largest_time import create_time, all_combs_of_four, check_if_time_valid, largest_time, generate_all_input_combinations
+from largest_time import create_time, all_combs_of_four, check_if_time_valid, largest_time
 
 
 # Tests that create_time correctly makes a time string from a list of four integers
